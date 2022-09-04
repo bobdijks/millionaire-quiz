@@ -1,6 +1,8 @@
+import { useState } from "react";
 import "./app.css";
 
 function App() {
+  const [questionNumber, setQuestionNumber] = useState(5);
 
   const pricePyramid = [
     {id:1, amount:"$ 100"},
@@ -25,7 +27,7 @@ function App() {
        <div className="pyramid">
           <ul className="priceList">
             {pricePyramid.map((m) => (
-              <li className="priceListItem">
+              <li className={questionNumber === m.id? "priceListItem active" : "priceListItem"}>
                 <span className="priceListItemNumber">{m.id}</span>
                 <span className="priceListItemAmount">{m.amount}</span>
               </li>
