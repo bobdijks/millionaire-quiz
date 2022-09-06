@@ -3,7 +3,77 @@ import "./app.css";
 import Trivia from "./components/Trivia.jsx";
 
 function App() {
-  const [questionNumber, setQuestionNumber] = useState(5);
+  const [questionNumber, setQuestionNumber] = useState(1);
+  const [timeOut, setTimeOut] = useState(false);
+
+  const data = [
+    {
+      id: 1,
+      question: "Rolex is a company that specializes in what type of product?",
+      answers: [
+        {
+          text: "Phones",
+          correct: false,
+        },
+        {
+          text: "Watches",
+          correct: true,
+        },
+        {
+          text: "Food",
+          correct: false,
+        },
+        {
+          text: "Cosmetics",
+          correct: false,
+        },
+      ],
+    },
+    {
+      id: 2,
+      question: "When did the website 'Facebook' launch?",
+      answers: [
+        {
+          text: "2004",
+          correct: true,
+        },
+        {
+          text: "1999",
+          correct: false,
+        },
+        {
+          text: "2010",
+          correct: false,
+        },
+        {
+          text: "2022",
+          correct: false,
+        },
+      ],
+    },
+    {
+      id: 3,
+      question: "Who played the main character in the Harry Potter movie franchise?",
+      answers: [
+        {
+          text: "Johnny Depp",
+          correct: false,
+        },
+        {
+          text: "Leonardo Di Caprio",
+          correct: false,
+        },
+        {
+          text: "Denzel Washington",
+          correct: false,
+        },
+        {
+          text: "Daniel Radcliffe",
+          correct: true,
+        },
+      ],
+    },
+  ];
 
   const pricePyramid = [
     {id:1, amount:"$ 100"},
@@ -29,7 +99,11 @@ function App() {
           <div className="timer">30</div>
         </div>
         <div className="bottom">
-          <Trivia />
+          <Trivia
+          data={data}
+          setTimeOut={setTimeOut}
+          questionNumber={questionNumber}
+          setQuestionNumber={setQuestionNumber}/>
         </div>
       </div>
        <div className="pyramid">
