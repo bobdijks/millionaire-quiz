@@ -23,7 +23,7 @@ const delay = (duration, callback) => {
 const handleClick = (a) => {
   setSelectedAnswer(a);
   setClassName("answer active");
-  delay(3000, () =>
+  delay(1000, () =>
     setClassName(a.correct ? "answer correct" : "answer wrong")
   );
   delay(6000, () =>
