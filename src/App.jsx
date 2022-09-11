@@ -117,7 +117,7 @@ function App() {
             <div className="bottom">
               <Trivia
               data={data}
-              setTimeOut={setStop}
+              setStop={setStop}
               questionNumber={questionNumber}
               setQuestionNumber={setQuestionNumber}/>
             </div>
