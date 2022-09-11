@@ -2,8 +2,10 @@ import { useState, useEffect, useMemo } from "react";
 import "./app.css";
 import Trivia from "./components/Trivia.jsx";
 import Timer from "./components/Timer.jsx";
+import Start from "./components/Start.jsx";
 
 function App() {
+  const [username, setUsername] = useState(null);
   const [questionNumber, setQuestionNumber] = useState(1);
   const [stop, setStop] = useState(false);
   const [money, setMoney] = useState("$ 0");
@@ -106,43 +108,55 @@ function App() {
 
   return (
     <div className="app">
-      <div className="main">
-          {stop ? (
-          <h1 className="endGame">You won: {money}</h1>
-           ) :
-          (
-          <>
-            <div className="top">
-              <div className="timer">
-                <Timer
-                  setStop={setStop}
-                  setQuestionNumber={setQuestionNumber}
-                />
-              </div>
-            </div>
-            <div className="bottom">
-              <Trivia
-              data={data}
-              setStop={setStop}
-              questionNumber={questionNumber}
-              setQuestionNumber={setQuestionNumber}
-              />
-            </div>
-          </>
-          )}
-      </div>
-       <div className="pyramid">
-          <ul className="priceList">
-            {pricePyramid.map((m) => (
-              <li className={questionNumber === m.id? "priceListItem active" : "priceListItem"}>
-                <span className="priceListItemNumber">{m.id}</span>
-                <span className="priceListItemAmount">{m.amount}</span>
-              </li>
-            ))}
-          </ul>
-      </div>
+      {!username ? (
+        <Start setUsername={setUsername} />
+      ) : (
+        <>
+          <div className="main">
+            {stop ? (
+              <h1 className="endGame">{username} earned: {money}</h1>
+            ) : (
+              <>
+                <div className="top">
+                  <div className="timer">
+                    <Timer
+                      setStop={setStop}
+                      questionNumber={questionNumber}
+                    />
+                  </div>
+                </div>
+                <div className="bottom">
+                  <Trivia
+                    data={data}
+                    questionNumber={questionNumber}
+                    setQuestionNumber={setQuestionNumber}
+                    setStop={setStop}
+                  />
+                </div>
+              </>
+            )}
+          </div>
+          <div className="pyramid">
+            <ul className="priceList">
+              {pricePyramid.map((m) => (
+                <li
+                  className={
+                    questionNumber === m.id
+                      ? "priceListItem active"
+                      : "priceListItem"
+                  }
+                >
+                  <span className="priceListItemNumber">{m.id}</span>
+                  <span className="priceListItemAmount">{m.amount}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </>
+      )}
     </div>
   );
 }
+
 
 export default App;
